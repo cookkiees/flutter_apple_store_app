@@ -33,47 +33,71 @@ class CartPage extends GetView<CartController> {
                           if (controller.cartItems.isEmpty) {
                             return const Text('data');
                           } else {
-                            return SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  AnimatedContainer(
-                                    duration: const Duration(milliseconds: 300),
-                                    height: controller.isExpandedList[index]
-                                        ? 300
-                                        : 120,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                          color: main.isPrimaryDark.value,
-                                          width: 0.5,
-                                        ),
-                                        color: main.isPrimaryLight.value),
-                                    child: Column(
-                                      children: [
-                                        Flexible(
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                width: 120,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 8,
-                                                        horizontal: 8),
-                                                child: Image.asset(
-                                                  'assets/images/${cart.image![3]}.png',
-                                                ),
+                            return Column(
+                              children: [
+                                AnimatedContainer(
+                                  duration: const Duration(milliseconds: 300),
+                                  height: controller.isExpandedList[index]
+                                      ? 300
+                                      : 130,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                        color: main.isPrimaryDark.value,
+                                        width: 0.5,
+                                      ),
+                                      color: main.isPrimaryLight.value),
+                                  child: ListView(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    children: [
+                                      Flexible(
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: 120,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8,
+                                                      horizontal: 8),
+                                              child: Image.asset(
+                                                'assets/images/${cart.image![2]}.png',
+                                                height: 110,
                                               ),
-                                              Expanded(
-                                                child: Container(
-                                                  height: 120,
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 12),
-                                                  decoration:
-                                                      const BoxDecoration(),
-                                                  child: Text(
-                                                    "${cart.name}",
-                                                    style: GoogleFonts.urbanist(
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 12),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "${cart.name}",
+                                                      style:
+                                                          GoogleFonts.urbanist(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          overflow:
+                                                              TextOverflow.fade,
+                                                        ),
+                                                        color: main
+                                                            .isPrimaryDark
+                                                            .value,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 8),
+                                                    Text(
+                                                      "\$ ${cart.price}",
+                                                      style:
+                                                          GoogleFonts.urbanist(
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.w400,
@@ -84,47 +108,50 @@ class CartPage extends GetView<CartController> {
                                                         ),
                                                         color: main
                                                             .isPrimaryDark
-                                                            .value),
-                                                  ),
+                                                            .value,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              Container(
-                                                height: 120,
-                                                padding: const EdgeInsets.only(
-                                                    top: 12, right: 12),
-                                                decoration:
-                                                    const BoxDecoration(),
-                                                child: const Align(
-                                                  alignment: Alignment.topRight,
-                                                  child: Icon(
-                                                    Icons.delete,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        if (controller.isExpandedList[index])
-                                          const Flexible(
-                                            child: SizedBox(
-                                              height: 120,
-                                              width: double.infinity,
                                             ),
-                                          )
-                                        else
-                                          const SizedBox.shrink()
-                                      ],
-                                    ),
+                                            Container(
+                                              height: 120,
+                                              padding: const EdgeInsets.only(
+                                                  top: 12, right: 12),
+                                              decoration: const BoxDecoration(),
+                                              child: const Align(
+                                                alignment: Alignment.topRight,
+                                                child: Icon(
+                                                  Icons.delete,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      if (controller.isExpandedList[index])
+                                        const Flexible(
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                          ),
+                                        )
+                                      else
+                                        const SizedBox.shrink()
+                                    ],
                                   ),
-                                  IconButton(
-                                    onPressed: () =>
-                                        controller.toggleExpanded(index),
-                                    icon: const Icon(
-                                      Icons.keyboard_arrow_down,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                                GestureDetector(
+                                  onTap: () => controller.toggleExpanded(index),
+                                  child: controller.isExpandedList[index]
+                                      ? const Icon(
+                                          Icons.keyboard_arrow_up,
+                                        )
+                                      : const Icon(
+                                          Icons.keyboard_arrow_down,
+                                        ),
+                                ),
+                              ],
                             );
                           }
                         },
