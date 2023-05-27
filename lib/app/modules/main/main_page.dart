@@ -1,10 +1,10 @@
-import 'package:apple_store/app/modules/cart/cart_page.dart';
-import 'package:apple_store/app/modules/store/store_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+import '../cart/cart_page.dart';
+import '../store/store_page.dart';
 import 'controllers/main_controller.dart';
 import 'widgets/main_appbar_widget.dart';
 import 'widgets/main_drawer_widget.dart';

@@ -1,3 +1,4 @@
+import 'package:apple_store/app/theme/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,7 +58,15 @@ class StorePage extends GetView<StoreController> {
                           return IPHONECardProductItemWidget(
                             onTap: () {
                               controller.addItemToCart(iPhone.id!);
-                              Get.snackbar('Oke', 'message');
+                              Get.defaultDialog(
+                                radius: 8,
+                                title: 'Add to cart',
+                                middleText: '${iPhone.name}',
+                                titleStyle: GoogleFonts.anton(
+                                    fontSize: 18, color: MyColors.onPrimary),
+                                middleTextStyle: GoogleFonts.urbanist(
+                                    fontSize: 18, color: MyColors.onPrimary),
+                              );
                             },
                             itemName: iPhone.name.toString(),
                             itemPrice: iPhone.price.toString(),

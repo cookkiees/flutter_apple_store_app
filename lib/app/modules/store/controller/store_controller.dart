@@ -73,6 +73,9 @@ class StoreController extends GetxController {
     ),
   ].obs;
   final RxList<Product> cartItems = RxList<Product>([]);
+  void removeCartItemById(int id) {
+    cartItems.removeWhere((item) => item.id == id);
+  }
 
   void addItemToCart(int id) {
     final product = typeiPhone.firstWhere((p) => p.id == id);
